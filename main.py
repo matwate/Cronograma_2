@@ -2,7 +2,7 @@ import openpyxl
 import calendar
 import datetime  
 
-def createCronogram(year: int,names: list, is_leap_year: bool = False):
+def createCronogram(year: int,names: list):
     file_path = "./excel/result.xlsx"
     workbook = openpyxl.Workbook()
     sheet = workbook.active
@@ -67,11 +67,12 @@ def colorRows():
     sheet = workbook.active
     
     for column in sheet.iter_cols(min_col=2, max_col=sheet.max_column):
-        if column[0].value == 'Do':  # Check if the first cell in the column is 'Do' (Sunday)
+        if column[0].value == 'Do' or column[0].value == 'Sa':  # Check if the first cell in the column is 'Do' (Sunday)
             for cell in column:
                 if cell.value != 'W':  # Check if the cell value is not 'W'
                     cell.fill = openpyxl.styles.PatternFill(start_color="33cccc", end_color="33cccc", fill_type="solid")  # Set cell color to #33cccc
-    
+                    if cell.row >2:
+                        cell.value = 'L'
     workbook.save(file_path)
 
 

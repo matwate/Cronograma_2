@@ -12,9 +12,9 @@ def on_button_click():
     year = int(year_input.get())
 
     # Get the value from the checkbox
-    is_leap_year = leap_var.get()
     
-    createCronogram(year, names, is_leap_year)
+    
+    createCronogram(year, names)
     
     subprocess.Popen(f'explorer "{os.path.realpath("./excel/result.xlsx")}"')
 # Create the text inputs for names
@@ -33,9 +33,7 @@ year_input = tk.CTkEntry(window)
 year_input.grid(row=5, column=1, padx=10, pady=10)
 
 # Create the checkmark for setting the year as leap or not
-leap_var = tk.BooleanVar(value=True)
-leap_checkbutton = tk.CTkCheckBox(window, text="Es Año Bisiesto?", variable=leap_var)
-leap_checkbutton.grid(row=6, column=0, padx=10, pady=10)
+
 
 # Create a button
 button = tk.CTkButton(window, text="Generar", command=on_button_click )
